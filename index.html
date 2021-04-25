@@ -39,9 +39,9 @@ background-image: url("data:image/svg+xml,%3Csvg width='12' height='24' viewBox=
 </head>
 <body>
 
-    <div id="txt" >
+    <div> <p id="txt"> 0</p>
 
-<p> </p>
+
     </div>
 
 <canvas width="500" height="500">
@@ -74,6 +74,7 @@ background-image: url("data:image/svg+xml,%3Csvg width='12' height='24' viewBox=
     console.log (txt.innerHTML);
 
     var counter = 0;
+    let contador= null;
 
     let state = {
         Canvas: null,
@@ -145,19 +146,33 @@ function randomXY() {
             state.runState = STATE_LOSING;
             state.growing = 0;
             alert("Game Over");
+            contador=0;
+            counter = document.getElementById("txt");
+            counter.innerText= contador
         }
 
-        if (didScore) {
+        if (didScore && contador != null) {
+
+        
             state.growing += GROW_SCALE;
             state.prey = randomXY();
-            counter = counter +1;
+            contador = contador +1;
             console.log(counter);
+            counter = document.getElementById("txt");
+            counter.innerText= contador
+           
         }
+
+        
 
         if (state.growing > 0) {
             state.snake.push(tail);
             state.growing -= 1;
         }
+
+if (contador== null ){
+    contador=0
+}
 
         requestAnimationFrame(draw);
         setTimeout(tick, interval);
